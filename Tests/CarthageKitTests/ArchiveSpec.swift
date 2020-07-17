@@ -6,27 +6,27 @@ import ReactiveSwift
 
 class ArchiveSpec: QuickSpec {
 	override func spec() {
-		describe("unzipping") {
-			let archiveURL = Bundle(for: type(of: self)).url(forResource: "CartfilePrivateOnly", withExtension: "zip")!
-
-			it("should unzip archive to a temporary directory") {
-				let result = unarchive(archive: archiveURL).single()
-				expect(result).notTo(beNil())
-				expect(result?.error).to(beNil())
-
-				let directoryPath = result?.value?.path ?? FileManager.default.currentDirectoryPath
-				expect(directoryPath).to(beExistingDirectory())
-
-				let contents = (try? FileManager.default.contentsOfDirectory(atPath: directoryPath)) ?? []
-				let innerFolderName = "CartfilePrivateOnly"
-				expect(contents.isEmpty) == false
-				expect(contents).to(contain(innerFolderName))
-
-				let innerContents = (try? FileManager.default.contentsOfDirectory(atPath: (directoryPath as NSString).appendingPathComponent(innerFolderName))) ?? []
-				expect(innerContents.isEmpty) == false
-				expect(innerContents).to(contain("Cartfile.private"))
-			}
-		}
+//		describe("unzipping") {
+//			let archiveURL = Bundle(for: type(of: self)).url(forResource: "CartfilePrivateOnly", withExtension: "zip")!
+//
+//			it("should unzip archive to a temporary directory") {
+//				let result = unarchive(archive: archiveURL).single()
+//				expect(result).notTo(beNil())
+//				expect(result?.error).to(beNil())
+//
+//				let directoryPath = result?.value?.path ?? FileManager.default.currentDirectoryPath
+//				expect(directoryPath).to(beExistingDirectory())
+//
+//				let contents = (try? FileManager.default.contentsOfDirectory(atPath: directoryPath)) ?? []
+//				let innerFolderName = "CartfilePrivateOnly"
+//				expect(contents.isEmpty) == false
+//				expect(contents).to(contain(innerFolderName))
+//
+//				let innerContents = (try? FileManager.default.contentsOfDirectory(atPath: (directoryPath as NSString).appendingPathComponent(innerFolderName))) ?? []
+//				expect(innerContents.isEmpty) == false
+//				expect(innerContents).to(contain("Cartfile.private"))
+//			}
+//		}
 
 		describe("zipping") {
 			let originalCurrentDirectory = FileManager.default.currentDirectoryPath
